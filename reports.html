@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Reports | MoneyMap</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+  
+    <script src="https://cdn.tailwindcss.com"></script>
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+   
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.4/jspdf.plugin.autotable.min.js"></script>
+
+    
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+
+
+        .reports-page {
+            min-height: 100vh;
+
+            background:
+                radial-gradient(
+                    circle at 75% 10%,
+                    rgba(16, 185, 129, 0.06),
+                    transparent 28%
+                ),
+                #020617;
+        }
+
+
+        .reports-main {
+            flex: 1;
+
+            min-width: 0;
+
+            width: 100%;
+
+            overflow-x: hidden;
+        }
+
+
+        .reports-container {
+            width: 100%;
+
+            max-width: 1600px;
+
+            margin: 0 auto;
+
+            padding: 48px;
+        }
+
+
+        .reports-header {
+            display: flex;
+
+            align-items: flex-start;
+
+            justify-content: space-between;
+
+            gap: 30px;
+
+            margin-bottom: 30px;
+        }
+
+
+        .reports-title-area {
+            min-width: 0;
+        }
+
+
+        .reports-label {
+            color: #10b981;
+
+            font-size: 15px;
+
+            font-weight: 700;
+
+            margin-bottom: 8px;
+        }
+
+
+        .reports-title {
+            color: #f8fafc;
+
+            font-size: clamp(32px, 4vw, 44px);
+
+            line-height: 1.15;
+
+            font-weight: 800;
+
+            letter-spacing: -0.04em;
+
+            margin-bottom: 8px;
+        }
+
+
+        .reports-subtitle {
+            color: #64748b;
+
+            font-size: 15px;
+        }
+
+
+        .report-buttons {
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            flex-shrink: 0;
+        }
+
+
+        .report-button {
+            min-height: 50px;
+
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 8px;
+
+            padding: 0 20px;
+
+            border-radius: 13px;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            text-decoration: none;
+
+            border: 1px solid #334155;
+
+            cursor: pointer;
+
+            transition: 0.2s ease;
+        }
+
+
+        .pdf-button {
+            color: #022c22;
+
+            background: #10b981;
+
+            border-color: #10b981;
+        }
+
+
+        .pdf-button:hover {
+            background: #34d399;
+
+            transform: translateY(-2px);
+        }
+
+
+        .print-button {
+            color: #cbd5e1;
+
+            background: #0f172a;
+        }
+
+
+        .print-button:hover {
+            color: #fff;
+
+            border-color: #475569;
+        }
+
+
+        .report-summary-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, minmax(0, 1fr));
+
+            gap: 18px;
+
+            margin-bottom: 24px;
+        }
+
+
+        .report-summary-card {
+            min-width: 0;
+
+            padding: 22px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(15, 23, 42, 0.98),
+                    rgba(15, 23, 42, 0.84)
+                );
+
+            border: 1px solid #1e293b;
+
+            border-radius: 17px;
+        }
+
+
+        .report-summary-card p {
+            color: #64748b;
+
+            font-size: 13px;
+
+            margin-bottom: 9px;
+        }
+
+
+        .report-summary-card h3 {
+            font-size: 27px;
+
+            font-weight: 800;
+
+            white-space: nowrap;
+
+            overflow: hidden;
+
+            text-overflow: ellipsis;
+        }
+
+
+        .report-income {
+            color: #34d399;
+        }
+
+
+        .report-expense {
+            color: #f87171;
+        }
+
+
+        .report-balance {
+            color: #60a5fa;
+        }
+
+
+        .report-savings {
+            color: #a78bfa;
+        }
+
+
+
+
+        .report-card {
+            min-width: 0;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(15, 23, 42, 0.98),
+                    rgba(15, 23, 42, 0.86)
+                );
+
+            border: 1px solid #1e293b;
+
+            border-radius: 18px;
+
+            overflow: hidden;
+
+            margin-bottom: 24px;
+        }
+
+
+        .report-card-header {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 20px;
+
+            padding: 25px 28px;
+
+            border-bottom: 1px solid #1e293b;
+        }
+
+
+        .report-card-header h3 {
+            color: #f8fafc;
+
+            font-size: 20px;
+
+            font-weight: 800;
+        }
+
+
+        .report-card-header p {
+            color: #64748b;
+
+            font-size: 13px;
+
+            margin-top: 5px;
+        }
+
+
+        .report-table-wrapper {
+            width: 100%;
+
+            overflow-x: auto;
+        }
+
+
+        .report-table {
+            width: 100%;
+
+            border-collapse: collapse;
+
+            min-width: 700px;
+        }
+
+
+        .report-table th {
+            padding: 15px 22px;
+
+            text-align: left;
+
+            color: #64748b;
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+            text-transform: uppercase;
+
+            letter-spacing: 0.08em;
+
+            background: rgba(2, 6, 23, 0.35);
+
+            border-bottom: 1px solid #1e293b;
+        }
+
+
+        .report-table td {
+            padding: 17px 22px;
+
+            color: #cbd5e1;
+
+            font-size: 13px;
+
+            border-bottom: 1px solid rgba(30, 41, 59, 0.7);
+        }
+
+
+        .report-table tbody tr:hover {
+            background: rgba(30, 41, 59, 0.25);
+        }
+
+
+        .report-income-badge {
+            display: inline-flex;
+
+            padding: 5px 9px;
+
+            border-radius: 999px;
+
+            color: #34d399;
+
+            background: rgba(16, 185, 129, 0.10);
+
+            font-size: 11px;
+
+            font-weight: 700;
+        }
+
+
+        .report-expense-badge {
+            display: inline-flex;
+
+            padding: 5px 9px;
+
+            border-radius: 999px;
+
+            color: #f87171;
+
+            background: rgba(244, 63, 94, 0.10);
+
+            font-size: 11px;
+
+            font-weight: 700;
+        }
+
+
+        .report-amount-income {
+            color: #34d399 !important;
+
+            font-weight: 700;
+        }
+
+
+        .report-amount-expense {
+            color: #f87171 !important;
+
+            font-weight: 700;
+        }
+
+
+        .report-empty {
+            padding: 60px 20px;
+
+            text-align: center;
+
+            color: #64748b;
+        }
+
+
+        .report-empty-icon {
+            font-size: 42px;
+
+            margin-bottom: 12px;
+        }
+
+
+        .report-empty h3 {
+            color: #cbd5e1;
+
+            font-size: 17px;
+
+            font-weight: 700;
+
+            margin-bottom: 6px;
+        }
+
+
+    
+
+        .reports-footer {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 20px;
+
+            padding: 10px 0 20px;
+
+            color: #475569;
+
+            font-size: 12px;
+        }
+
+
+
+        @media (max-width: 1199px) {
+
+            .reports-container {
+                padding: 34px 24px;
+            }
+
+            .report-summary-grid {
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+            }
+
+        }
+
+
+
+        @media (max-width: 767px) {
+
+            .reports-container {
+                padding: 26px 18px;
+            }
+
+
+            .reports-header {
+                flex-direction: column;
+
+                gap: 20px;
+            }
+
+
+            .reports-title {
+                font-size: 33px;
+            }
+
+
+            .report-buttons {
+                width: 100%;
+            }
+
+
+            .report-button {
+                flex: 1;
+
+                padding: 0 12px;
+            }
+
+
+            .report-summary-grid {
+                grid-template-columns:
+                    1fr;
+
+                gap: 10px;
+            }
+
+
+            .report-summary-card {
+                padding: 18px;
+            }
+
+
+            .report-summary-card h3 {
+                font-size: 24px;
+            }
+
+
+            .report-card-header {
+                padding: 20px;
+            }
+
+
+            .reports-footer {
+                flex-direction: column;
+
+                align-items: flex-start;
+
+                gap: 6px;
+            }
+
+        }
+
+
+        @media (max-width: 389px) {
+
+            .reports-container {
+                padding: 22px 12px;
+            }
+
+
+            .reports-title {
+                font-size: 29px;
+            }
+
+
+            .report-button {
+                font-size: 12px;
+            }
+
+        }
+
+
+        @media print {
+
+            body {
+                background: white !important;
+
+                color: #111827 !important;
+            }
+
+
+            .dashboard-sidebar,
+            .mobile-dashboard-header,
+            .mobile-dashboard-menu,
+            .report-buttons,
+            .reports-footer {
+                display: none !important;
+            }
+
+
+            .reports-main {
+                width: 100% !important;
+            }
+
+
+            .reports-container {
+                max-width: 100% !important;
+
+                padding: 20px !important;
+            }
+
+
+            .reports-page {
+                background: white !important;
+            }
+
+
+            .report-card,
+            .report-summary-card {
+                background: white !important;
+
+                border: 1px solid #ddd !important;
+
+                color: #111827 !important;
+            }
+
+
+            .reports-title,
+            .report-card-header h3,
+            .report-summary-card h3 {
+                color: #111827 !important;
+            }
+
+
+            .reports-subtitle,
+            .report-summary-card p,
+            .report-card-header p {
+                color: #555 !important;
+            }
+
+
+            .report-table th,
+            .report-table td {
+                color: #111827 !important;
+
+                border-color: #ddd !important;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body class="reports-page">
+
+
+    <header class="mobile-dashboard-header lg:hidden">
+
+        <div class="flex items-center justify-between gap-4">
+
+            <a
+                href="index.html"
+                class="flex items-center gap-3 min-w-0"
+            >
+
+                <div class="logo-box">
+                    💰
+                </div>
+
+                <div class="min-w-0">
+
+                    <h1 class="text-lg font-bold text-white">
+                        MoneyMap
+                    </h1>
+
+                    <p class="text-[9px] tracking-[0.18em] text-slate-400 uppercase">
+                        Personal Finance
+                    </p>
+
+                </div>
+
+            </a>
+
+
+            <button
+                id="mobileMenuBtn"
+                class="mobile-menu-button"
+                aria-label="Open menu"
+            >
+                ☰
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <div
+        id="mobileMenu"
+        class="mobile-dashboard-menu hidden lg:hidden"
+    >
+
+        <nav class="space-y-2">
+
+            <a
+                href="dashboard.html"
+                class="mobile-nav-link"
+            >
+                📊
+                <span>Dashboard</span>
+            </a>
+
+            <a
+                href="transactions.html"
+                class="mobile-nav-link"
+            >
+                💳
+                <span>Transactions</span>
+            </a>
+
+            <a
+                href="analytics.html"
+                class="mobile-nav-link"
+            >
+                📈
+                <span>Analytics</span>
+            </a>
+
+            <a
+                href="reports.html"
+                class="mobile-nav-link active"
+            >
+                📄
+                <span>Reports</span>
+            </a>
+
+        </nav>
+
+    </div>
+
+
+
+    <div class="dashboard-layout">
+
+
+        <aside class="dashboard-sidebar hidden lg:flex">
+
+            <div class="sidebar-logo">
+
+                <a
+                    href="index.html"
+                    class="flex items-center gap-3"
+                >
+
+                    <div class="logo-box">
+                        💰
+                    </div>
+
+                    <div>
+
+                        <h1 class="text-xl font-extrabold text-white">
+                            MoneyMap
+                        </h1>
+
+                        <p class="text-[10px] tracking-[0.2em] text-slate-400 uppercase">
+                            Personal Finance
+                        </p>
+
+                    </div>
+
+                </a>
+
+            </div>
+
+
+            <nav class="sidebar-navigation">
+
+                <a
+                    href="dashboard.html"
+                    class="sidebar-link"
+                >
+                    <span class="sidebar-icon">📊</span>
+                    <span>Dashboard</span>
+                </a>
+
+
+                <a
+                    href="transactions.html"
+                    class="sidebar-link"
+                >
+                    <span class="sidebar-icon">💳</span>
+                    <span>Transactions</span>
+                </a>
+
+
+                <a
+                    href="analytics.html"
+                    class="sidebar-link"
+                >
+                    <span class="sidebar-icon">📈</span>
+                    <span>Analytics</span>
+                </a>
+
+
+                <a
+                    href="reports.html"
+                    class="sidebar-link active"
+                >
+                    <span class="sidebar-icon">📄</span>
+                    <span>Reports</span>
+                </a>
+
+            </nav>
+
+
+            <div class="sidebar-bottom">
+
+                <div class="money-tip">
+
+                    <h3>
+                        Money Tip 💡
+                    </h3>
+
+                    <p>
+                        Review your financial reports regularly and understand where your money goes.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </aside>
+
+        <main class="reports-main">
+
+            <div class="reports-container">
+
+
+                <section class="reports-header">
+
+                    <div class="reports-title-area">
+
+                        <p class="reports-label">
+                            Financial Reports
+                        </p>
+
+                        <h2 class="reports-title">
+                            Money Report 📄
+                        </h2>
+
+                        <p class="reports-subtitle">
+                            A complete overview of your income, expenses and savings.
+                        </p>
+
+                    </div>
+
+
+                    <div class="report-buttons">
+
+                        <button
+                            id="printReport"
+                            class="report-button print-button"
+                        >
+                            🖨️ Print
+                        </button>
+
+
+                        <button
+                            id="downloadPdf"
+                            class="report-button pdf-button"
+                        >
+                            📄 Download PDF
+                        </button>
+
+                    </div>
+
+                </section>
+
+
+                <section class="report-summary-grid">
+
+
+                    <div class="report-summary-card">
+
+                        <p>
+                            Total Income
+                        </p>
+
+                        <h3
+                            id="reportIncome"
+                            class="report-income"
+                        >
+                            Rs. 0
+                        </h3>
+
+                    </div>
+
+
+                    <div class="report-summary-card">
+
+                        <p>
+                            Total Expenses
+                        </p>
+
+                        <h3
+                            id="reportExpenses"
+                            class="report-expense"
+                        >
+                            Rs. 0
+                        </h3>
+
+                    </div>
+
+
+                    <div class="report-summary-card">
+
+                        <p>
+                            Current Balance
+                        </p>
+
+                        <h3
+                            id="reportBalance"
+                            class="report-balance"
+                        >
+                            Rs. 0
+                        </h3>
+
+                    </div>
+
+
+                    <div class="report-summary-card">
+
+                        <p>
+                            Savings Rate
+                        </p>
+
+                        <h3
+                            id="reportSavings"
+                            class="report-savings"
+                        >
+                            0%
+                        </h3>
+
+                    </div>
+
+                </section>
+
+
+                <section class="report-card">
+
+                    <div class="report-card-header">
+
+                        <div>
+
+                            <h3>
+                                Transaction Report
+                            </h3>
+
+                            <p>
+                                All recorded financial transactions
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        id="reportTableContainer"
+                        class="report-table-wrapper"
+                    >
+
+                    
+
+                    </div>
+
+                </section>
+
+
+                <section class="report-card">
+
+                    <div class="report-card-header">
+
+                        <div>
+
+                            <h3>
+                                Report Information
+                            </h3>
+
+                            <p>
+                                MoneyMap generated financial summary
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="p-6 grid grid-cols-1 sm:grid-cols-2 gap-5">
+
+                        <div>
+
+                            <p class="text-xs text-slate-500 mb-1">
+                                Report Date
+                            </p>
+
+                            <p
+                                id="reportDate"
+                                class="text-sm font-semibold text-slate-200"
+                            >
+                                -
+                            </p>
+
+                        </div>
+
+
+                        <div>
+
+                            <p class="text-xs text-slate-500 mb-1">
+                                Total Transactions
+                            </p>
+
+                            <p
+                                id="reportTransactionCount"
+                                class="text-sm font-semibold text-slate-200"
+                            >
+                                0
+                            </p>
+
+                        </div>
+
+
+                        <div>
+
+                            <p class="text-xs text-slate-500 mb-1">
+                                Income Transactions
+                            </p>
+
+                            <p
+                                id="reportIncomeCount"
+                                class="text-sm font-semibold text-emerald-400"
+                            >
+                                0
+                            </p>
+
+                        </div>
+
+
+                        <div>
+
+                            <p class="text-xs text-slate-500 mb-1">
+                                Expense Transactions
+                            </p>
+
+                            <p
+                                id="reportExpenseCount"
+                                class="text-sm font-semibold text-rose-400"
+                            >
+                                0
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+             
+
+                <footer class="reports-footer">
+
+                    <p>
+                        © <span id="reportsYear"></span>
+                        MoneyMap. All rights reserved.
+                    </p>
+
+                    <p>
+                        Personal Finance Report
+                    </p>
+
+                </footer>
+
+            </div>
+
+        </main>
+
+    </div>
+
+    <script src="js/reports.js"></script>
+
+</body>
+
+</html>

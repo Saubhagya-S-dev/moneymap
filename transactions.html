@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Transactions | MoneyMap</title>
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="bg-slate-950 text-white">
+
+  
+
+    <header class="lg:hidden sticky top-0 z-50 bg-slate-950/95 backdrop-blur-xl border-b border-white/10">
+
+        <div class="flex items-center justify-between px-4 py-4">
+
+        
+            <a
+                href="dashboard.html"
+                class="flex items-center gap-3"
+            >
+                <div
+                    class="w-10 h-10 rounded-xl bg-emerald-500 flex items-center justify-center text-xl"
+                >
+                    💰
+                </div>
+
+                <div>
+                    <div class="font-extrabold text-lg">
+                        MoneyMap
+                    </div>
+
+                    <div class="text-[10px] uppercase tracking-[0.2em] text-slate-500">
+                        Personal Finance
+                    </div>
+                </div>
+            </a>
+
+        
+            <button
+                id="mobileMenuBtn"
+                class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-xl"
+            >
+                ☰
+            </button>
+
+        </div>
+
+       
+        <div
+            id="mobileMenu"
+            class="hidden px-4 pb-4"
+        >
+
+            <nav class="grid gap-2">
+
+                <a
+                    href="dashboard.html"
+                    class="px-4 py-3 rounded-xl text-slate-300 hover:bg-white/5 hover:text-white transition"
+                >
+                    📊 Dashboard
+                </a>
+
+                <a
+                    href="transactions.html"
+                    class="px-4 py-3 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
+                >
+                    💳 Transactions
+                </a>
+
+                <a
+                    href="analytics.html"
+                    class="px-4 py-3 rounded-xl text-slate-300 hover:bg-white/5 hover:text-white transition"
+                >
+                    📈 Analytics
+                </a>
+
+            <a
+    href="reports.html"
+    class="px-4 py-3 rounded-xl text-slate-300 hover:bg-white/5 hover:text-white transition"
+>
+    📄 Reports
+</a>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+
+
+
+    <aside
+        class="hidden lg:flex fixed left-0 top-0 bottom-0 w-64 bg-slate-950 border-r border-white/10 flex-col z-40"
+    >
+
+        <!-- Logo -->
+        <div class="p-6 border-b border-white/10">
+
+            <a
+                href="dashboard.html"
+                class="flex items-center gap-3"
+            >
+
+                <div
+                    class="w-11 h-11 rounded-xl bg-emerald-500 flex items-center justify-center text-xl"
+                >
+                    💰
+                </div>
+
+                <div>
+
+                    <div class="font-extrabold text-xl">
+                        MoneyMap
+                    </div>
+
+                    <div class="text-[10px] uppercase tracking-[0.2em] text-slate-500">
+                        Personal Finance
+                    </div>
+
+                </div>
+
+            </a>
+
+        </div>
+
+
+   
+        <nav class="p-4 space-y-2 flex-1">
+
+            <a
+                href="dashboard.html"
+                class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:text-white hover:bg-white/5 transition"
+            >
+                <span>📊</span>
+                <span>Dashboard</span>
+            </a>
+
+            <a
+                href="transactions.html"
+                class="flex items-center gap-3 px-4 py-3 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
+            >
+                <span>💳</span>
+                <span>Transactions</span>
+            </a>
+
+            <a
+                href="analytics.html"
+                class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:text-white hover:bg-white/5 transition"
+            >
+                <span>📈</span>
+                <span>Analytics</span>
+            </a>
+
+            <a
+                href="#"
+                class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:text-white hover:bg-white/5 transition"
+            >
+                <span>📄</span>
+                <span>Reports</span>
+            </a>
+
+        </nav>
+
+
+      
+        <div class="p-4 border-t border-white/10">
+
+            <div class="rounded-2xl bg-white/5 border border-white/10 p-4">
+
+                <div class="text-sm font-semibold mb-1">
+                    Money Tip 💡
+                </div>
+
+                <p class="text-xs text-slate-500 leading-relaxed">
+                    Track every expense to understand where your money goes.
+                </p>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <main class="lg:ml-64 min-h-screen">
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-10">
+
+
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-5 mb-8">
+
+                <div>
+
+                    <p class="text-emerald-400 text-sm font-semibold mb-2">
+                        Financial Activity
+                    </p>
+
+                    <h1 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold">
+                        Transactions
+                    </h1>
+
+                    <p class="text-slate-500 mt-2 text-sm sm:text-base">
+                        Manage your income and expenses.
+                    </p>
+
+                </div>
+
+
+                <button
+                    id="openAddTransaction"
+                    class="w-full md:w-auto px-5 py-3.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold transition shadow-lg shadow-emerald-500/20"
+                >
+                    + Add Transaction
+                </button>
+
+            </div>
+
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 mb-8">
+
+
+                <!-- Income -->
+                <div
+                    class="bg-slate-900/70 border border-white/10 rounded-2xl p-5"
+                >
+
+                    <div class="flex items-center justify-between">
+
+                        <div>
+
+                            <p class="text-slate-500 text-sm">
+                                Total Income
+                            </p>
+
+                            <h2
+                                id="totalIncome"
+                                class="text-2xl font-extrabold mt-2 text-emerald-400"
+                            >
+                                Rs. 0
+                            </h2>
+
+                        </div>
+
+                        <div
+                            class="w-11 h-11 rounded-xl bg-emerald-500/10 flex items-center justify-center"
+                        >
+                            💰
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+          
+                <div
+                    class="bg-slate-900/70 border border-white/10 rounded-2xl p-5"
+                >
+
+                    <div class="flex items-center justify-between">
+
+                        <div>
+
+                            <p class="text-slate-500 text-sm">
+                                Total Expenses
+                            </p>
+
+                            <h2
+                                id="totalExpenses"
+                                class="text-2xl font-extrabold mt-2 text-red-400"
+                            >
+                                Rs. 0
+                            </h2>
+
+                        </div>
+
+                        <div
+                            class="w-11 h-11 rounded-xl bg-red-500/10 flex items-center justify-center"
+                        >
+                            💸
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            
+                <div
+                    class="bg-slate-900/70 border border-white/10 rounded-2xl p-5 sm:col-span-2 xl:col-span-1"
+                >
+
+                    <div class="flex items-center justify-between">
+
+                        <div>
+
+                            <p class="text-slate-500 text-sm">
+                                Balance
+                            </p>
+
+                            <h2
+                                id="totalBalance"
+                                class="text-2xl font-extrabold mt-2"
+                            >
+                                Rs. 0
+                            </h2>
+
+                        </div>
+
+                        <div
+                            class="w-11 h-11 rounded-xl bg-blue-500/10 flex items-center justify-center"
+                        >
+                            📊
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <section
+                class="bg-slate-900/70 border border-white/10 rounded-2xl p-4 sm:p-5 mb-6"
+            >
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
+
+                    <!-- Search -->
+                    <div class="sm:col-span-2 xl:col-span-1">
+
+                        <label class="block text-xs font-semibold text-slate-400 mb-2">
+                            Search
+                        </label>
+
+                        <div class="relative">
+
+                            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500">
+                                🔎
+                            </span>
+
+                            <input
+                                id="searchTransactions"
+                                type="text"
+                                placeholder="Search transactions..."
+                                class="w-full bg-slate-950 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-sm outline-none focus:border-emerald-500/50 transition"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+              
+                    <div>
+
+                        <label class="block text-xs font-semibold text-slate-400 mb-2">
+                            Type
+                        </label>
+
+                        <select
+                            id="typeFilter"
+                            class="w-full bg-slate-950 border border-white/10 rounded-xl px-4 py-3 text-sm outline-none focus:border-emerald-500/50"
+                        >
+
+                            <option value="all">
+                                All Types
+                            </option>
+
+                            <option value="income">
+                                Income
+                            </option>
+
+                            <option value="expense">
+                                Expense
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div>
+
+                        <label class="block text-xs font-semibold text-slate-400 mb-2">
+                            Category
+                        </label>
+
+                        <select
+                            id="categoryFilter"
+                            class="w-full bg-slate-950 border border-white/10 rounded-xl px-4 py-3 text-sm outline-none focus:border-emerald-500/50"
+                        >
+
+                            <option value="all">
+                                All Categories
+                            </option>
+
+                            <option value="Salary">
+                                Salary
+                            </option>
+
+                            <option value="Food">
+                                Food
+                            </option>
+
+                            <option value="Shopping">
+                                Shopping
+                            </option>
+
+                            <option value="Transport">
+                                Transport
+                            </option>
+
+                            <option value="Bills">
+                                Bills
+                            </option>
+
+                            <option value="Entertainment">
+                                Entertainment
+                            </option>
+
+                            <option value="Health">
+                                Health
+                            </option>
+
+                            <option value="Education">
+                                Education
+                            </option>
+
+                            <option value="Other">
+                                Other
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+          
+                    <div>
+
+                        <label class="block text-xs font-semibold text-slate-400 mb-2">
+                            Date
+                        </label>
+
+                        <select
+                            id="dateFilter"
+                            class="w-full bg-slate-950 border border-white/10 rounded-xl px-4 py-3 text-sm outline-none focus:border-emerald-500/50"
+                        >
+
+                            <option value="all">
+                                All Dates
+                            </option>
+
+                            <option value="today">
+                                Today
+                            </option>
+
+                            <option value="week">
+                                This Week
+                            </option>
+
+                            <option value="month">
+                                This Month
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+              
+                <div class="mt-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+
+                    <p
+                        id="transactionCount"
+                        class="text-xs text-slate-500"
+                    >
+                        0 transactions
+                    </p>
+
+                    <button
+                        id="clearFilters"
+                        class="text-sm text-emerald-400 hover:text-emerald-300 font-semibold text-left sm:text-right"
+                    >
+                        Clear Filters
+                    </button>
+
+                </div>
+
+            </section>
+
+
+
+            <section
+                class="bg-slate-900/70 border border-white/10 rounded-2xl overflow-hidden"
+            >
+
+            
+                <div
+                    class="hidden md:grid grid-cols-[2fr_1fr_1fr_1fr_120px] gap-4 px-6 py-4 border-b border-white/10 text-xs uppercase tracking-wider text-slate-500 font-semibold"
+                >
+
+                    <div>
+                        Transaction
+                    </div>
+
+                    <div>
+                        Type
+                    </div>
+
+                    <div>
+                        Date
+                    </div>
+
+                    <div>
+                        Amount
+                    </div>
+
+                    <div class="text-right">
+                        Actions
+                    </div>
+
+                </div>
+
+
+             
+                <div id="transactionsList">
+
+                
+
+                </div>
+
+
+             
+                <div
+                    id="emptyState"
+                    class="hidden text-center py-16 px-6"
+                >
+
+                    <div class="text-5xl mb-4">
+                        💳
+                    </div>
+
+                    <h3 class="text-lg font-bold mb-2">
+                        No transactions found
+                    </h3>
+
+                    <p class="text-sm text-slate-500 mb-5">
+                        Add your first income or expense to get started.
+                    </p>
+
+                    <button
+                        id="emptyAddBtn"
+                        class="px-5 py-3 rounded-xl bg-emerald-500 text-slate-950 font-bold"
+                    >
+                        + Add Transaction
+                    </button>
+
+                </div>
+
+            </section>
+
+        </div>
+
+    </main>
+
+
+    <div
+        id="transactionModal"
+        class="hidden fixed inset-0 z-[100] bg-black/70 backdrop-blur-sm p-4 overflow-y-auto"
+    >
+
+        <div class="min-h-full flex items-center justify-center">
+
+            <div
+                class="w-full max-w-xl bg-slate-900 border border-white/10 rounded-2xl shadow-2xl"
+            >
+
+           
+                <div
+                    class="flex items-center justify-between px-5 sm:px-6 py-5 border-b border-white/10"
+                >
+
+                    <div>
+
+                        <h2
+                            id="modalTitle"
+                            class="text-xl font-bold"
+                        >
+                            Add Transaction
+                        </h2>
+
+                        <p class="text-xs text-slate-500 mt-1">
+                            Record your income or expense.
+                        </p>
+
+                    </div>
+
+                    <button
+                        id="closeModal"
+                        class="w-9 h-9 rounded-lg bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white"
+                    >
+                        ✕
+                    </button>
+
+                </div>
+
+
+                
+                <form
+                    id="transactionForm"
+                    class="p-5 sm:p-6 space-y-5"
+                >
+
+                    <input
+                        type="hidden"
+                        id="transactionId"
+                    >
+
+
+                 
+                    <div>
+
+                        <label class="block text-sm font-semibold mb-2">
+                            Transaction Type
+                        </label>
+
+                        <div class="grid grid-cols-2 gap-3">
+
+                            <label
+                                class="cursor-pointer"
+                            >
+
+                                <input
+                                    type="radio"
+                                    name="transactionType"
+                                    value="income"
+                                    class="peer hidden"
+                                    checked
+                                >
+
+                                <div
+                                    class="rounded-xl border border-white/10 bg-slate-950 p-4 text-center peer-checked:border-emerald-500 peer-checked:bg-emerald-500/10 transition"
+                                >
+
+                                    <div class="text-xl mb-1">
+                                        💰
+                                    </div>
+
+                                    <div class="font-semibold text-sm">
+                                        Income
+                                    </div>
+
+                                </div>
+
+                            </label>
+
+
+                            <label
+                                class="cursor-pointer"
+                            >
+
+                                <input
+                                    type="radio"
+                                    name="transactionType"
+                                    value="expense"
+                                    class="peer hidden"
+                                >
+
+                                <div
+                                    class="rounded-xl border border-white/10 bg-slate-950 p-4 text-center peer-checked:border-red-500 peer-checked:bg-red-500/10 transition"
+                                >
+
+                                    <div class="text-xl mb-1">
+                                        💸
+                                    </div>
+
+                                    <div class="font-semibold text-sm">
+                                        Expense
+                                    </div>
+
+                                </div>
+
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                    <div>
+
+                        <label
+                            for="transactionTitle"
+                            class="block text-sm font-semibold mb-2"
+                        >
+                            Title
+                        </label>
+
+                        <input
+                            id="transactionTitle"
+                            type="text"
+                            placeholder="e.g. Salary, Grocery shopping..."
+                            required
+                            class="w-full bg-slate-950 border border-white/10 rounded-xl px-4 py-3 outline-none focus:border-emerald-500/50 transition"
+                        >
+
+                    </div>
+
+
+               
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+                        <div>
+
+                            <label
+                                for="transactionCategory"
+                                class="block text-sm font-semibold mb-2"
+                            >
+                                Category
+                            </label>
+
+                            <select
+                                id="transactionCategory"
+                                required
+                                class="w-full bg-slate-950 border border-white/10 rounded-xl px-4 py-3 outline-none focus:border-emerald-500/50"
+                            >
+
+                                <option value="">
+                                    Select Category
+                                </option>
+
+                                <option value="Salary">
+                                    Salary
+                                </option>
+
+                                <option value="Food">
+                                    Food
+                                </option>
+
+                                <option value="Shopping">
+                                    Shopping
+                                </option>
+
+                                <option value="Transport">
+                                    Transport
+                                </option>
+
+                                <option value="Bills">
+                                    Bills
+                                </option>
+
+                                <option value="Entertainment">
+                                    Entertainment
+                                </option>
+
+                                <option value="Health">
+                                    Health
+                                </option>
+
+                                <option value="Education">
+                                    Education
+                                </option>
+
+                                <option value="Other">
+                                    Other
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div>
+
+                            <label
+                                for="transactionAmount"
+                                class="block text-sm font-semibold mb-2"
+                            >
+                                Amount (Rs.)
+                            </label>
+
+                            <input
+                                id="transactionAmount"
+                                type="number"
+                                min="1"
+                                step="0.01"
+                                placeholder="0.00"
+                                required
+                                class="w-full bg-slate-950 border border-white/10 rounded-xl px-4 py-3 outline-none focus:border-emerald-500/50"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+        
+                    <div>
+
+                        <label
+                            for="transactionDate"
+                            class="block text-sm font-semibold mb-2"
+                        >
+                            Date
+                        </label>
+
+                        <input
+                            id="transactionDate"
+                            type="date"
+                            required
+                            class="w-full bg-slate-950 border border-white/10 rounded-xl px-4 py-3 outline-none focus:border-emerald-500/50"
+                        >
+
+                    </div>
+
+
+                 
+                    <div>
+
+                        <label
+                            for="transactionNote"
+                            class="block text-sm font-semibold mb-2"
+                        >
+                            Note
+                        </label>
+
+                        <textarea
+                            id="transactionNote"
+                            rows="3"
+                            placeholder="Optional note..."
+                            class="w-full bg-slate-950 border border-white/10 rounded-xl px-4 py-3 outline-none focus:border-emerald-500/50 resize-none"
+                        ></textarea>
+
+                    </div>
+
+
+             
+                    <div class="flex flex-col-reverse sm:flex-row gap-3 pt-2">
+
+                        <button
+                            type="button"
+                            id="cancelModal"
+                            class="w-full sm:flex-1 px-5 py-3 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 font-semibold transition"
+                        >
+                            Cancel
+                        </button>
+
+                        <button
+                            type="submit"
+                            class="w-full sm:flex-1 px-5 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold transition"
+                        >
+                            Save Transaction
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script src="js/transactions.js"></script>
+
+</body>
+</html>

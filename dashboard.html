@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard | MoneyMap</title>
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="dashboard-page">
+
+
+    <header class="mobile-dashboard-header lg:hidden">
+
+        <div class="flex items-center justify-between gap-4">
+
+            <!-- Logo -->
+            <a href="index.html" class="flex items-center gap-3 min-w-0">
+
+                <div class="logo-box">
+                    💰
+                </div>
+
+                <div class="min-w-0">
+                    <h1 class="text-lg font-bold text-white truncate">
+                        MoneyMap
+                    </h1>
+
+                    <p class="text-[9px] tracking-[0.18em] text-slate-400 uppercase">
+                        Personal Finance
+                    </p>
+                </div>
+
+            </a>
+
+            <button
+                id="mobileMenuBtn"
+                class="mobile-menu-button"
+                aria-label="Open menu"
+            >
+                ☰
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <div
+        id="mobileMenu"
+        class="mobile-dashboard-menu hidden lg:hidden"
+    >
+
+        <nav class="space-y-2">
+
+            <a href="dashboard.html" class="mobile-nav-link active">
+                📊
+                <span>Dashboard</span>
+            </a>
+
+            <a href="transactions.html" class="mobile-nav-link">
+                💳
+                <span>Transactions</span>
+            </a>
+
+            <a href="analytics.html" class="mobile-nav-link">
+                📈
+                <span>Analytics</span>
+            </a>
+
+            <a href="reports.html" class="mobile-nav-link">
+                📄
+                <span>Reports</span>
+            </a>
+
+        </nav>
+
+    </div>
+
+
+    <div class="dashboard-layout">
+
+
+        <aside class="dashboard-sidebar hidden lg:flex">
+
+            <!-- Sidebar Logo -->
+            <div class="sidebar-logo">
+
+                <a href="index.html" class="flex items-center gap-3">
+
+                    <div class="logo-box">
+                        💰
+                    </div>
+
+                    <div>
+                        <h1 class="text-xl font-extrabold text-white">
+                            MoneyMap
+                        </h1>
+
+                        <p class="text-[10px] tracking-[0.2em] text-slate-400 uppercase">
+                            Personal Finance
+                        </p>
+                    </div>
+
+                </a>
+
+            </div>
+
+
+    
+            <nav class="sidebar-navigation">
+
+                <a href="dashboard.html" class="sidebar-link active">
+
+                    <span class="sidebar-icon">
+                        📊
+                    </span>
+
+                    <span>
+                        Dashboard
+                    </span>
+
+                </a>
+
+
+                <a href="transactions.html" class="sidebar-link">
+
+                    <span class="sidebar-icon">
+                        💳
+                    </span>
+
+                    <span>
+                        Transactions
+                    </span>
+
+                </a>
+
+
+                <a href="analytics.html" class="sidebar-link">
+
+                    <span class="sidebar-icon">
+                        📈
+                    </span>
+
+                    <span>
+                        Analytics
+                    </span>
+
+                </a>
+
+
+                <a href="reports.html" class="sidebar-link">
+
+                    <span class="sidebar-icon">
+                        📄
+                    </span>
+
+                    <span>
+                        Reports
+                    </span>
+
+                </a>
+
+            </nav>
+
+
+       
+            <div class="sidebar-bottom">
+
+                <div class="money-tip">
+
+                    <h3>
+                        Money Tip 💡
+                    </h3>
+
+                    <p>
+                        Track every expense and build better financial habits.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </aside>
+
+
+    
+
+        <main class="dashboard-main">
+
+            <div class="dashboard-container">
+
+
+
+                <div class="dashboard-topbar">
+
+                    <div class="dashboard-heading">
+
+                        <p class="dashboard-label">
+                            Personal Finance
+                        </p>
+
+                        <h2>
+                            Good morning 👋
+                        </h2>
+
+                        <p class="dashboard-subtitle">
+                            Here's what's happening with your money.
+                        </p>
+
+                    </div>
+
+
+                   
+                    <a
+                        href="transactions.html"
+                        class="add-transaction-button"
+                    >
+                        <span>+</span>
+                        <span>Add Transaction</span>
+                    </a>
+
+                </div>
+
+
+    
+
+                <section class="stats-grid">
+
+
+                    <!-- Balance -->
+                    <div class="stat-card">
+
+                        <div class="stat-content">
+
+                            <p class="stat-title">
+                                Total Balance
+                            </p>
+
+                            <h3
+                                id="totalBalance"
+                                class="stat-value balance-value"
+                            >
+                                Rs. 0
+                            </h3>
+
+                        </div>
+
+                        <div class="stat-icon balance-icon">
+                            💰
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-content">
+
+                            <p class="stat-title">
+                                Total Income
+                            </p>
+
+                            <h3
+                                id="totalIncome"
+                                class="stat-value income-value"
+                            >
+                                Rs. 0
+                            </h3>
+
+                        </div>
+
+                        <div class="stat-icon income-icon">
+                            📥
+                        </div>
+
+                    </div>
+
+
+                   
+                    <div class="stat-card">
+
+                        <div class="stat-content">
+
+                            <p class="stat-title">
+                                Total Expenses
+                            </p>
+
+                            <h3
+                                id="totalExpenses"
+                                class="stat-value expense-value"
+                            >
+                                Rs. 0
+                            </h3>
+
+                        </div>
+
+                        <div class="stat-icon expense-icon">
+                            📤
+                        </div>
+
+                    </div>
+
+
+        
+                    <div class="stat-card">
+
+                        <div class="stat-content">
+
+                            <p class="stat-title">
+                                Savings Rate
+                            </p>
+
+                            <h3
+                                id="savingsRate"
+                                class="stat-value savings-value"
+                            >
+                                0%
+                            </h3>
+
+                        </div>
+
+                        <div class="stat-icon savings-icon">
+                            💎
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <section class="dashboard-content-grid">
+
+
+                    <div class="chart-card">
+
+                        <div class="card-header">
+
+                            <div>
+
+                                <h3>
+                                    Income vs Expenses
+                                </h3>
+
+                                <p>
+                                    Monthly financial overview
+                                </p>
+
+                            </div>
+
+                            <a
+                                href="analytics.html"
+                                class="view-link"
+                            >
+                                View Analytics →
+                            </a>
+
+                        </div>
+
+
+                   
+                        <div class="chart-wrapper">
+
+                            <canvas id="incomeExpenseChart"></canvas>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="quick-actions-card">
+
+                        <div class="card-header quick-header">
+
+                            <div>
+
+                                <h3>
+                                    Quick Actions
+                                </h3>
+
+                                <p>
+                                    Manage your money quickly.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="quick-actions-list">
+
+
+    
+                            <a
+                                href="transactions.html?type=income"
+                                class="quick-action income-action"
+                            >
+
+                                <div class="quick-action-icon">
+                                    💰
+                                </div>
+
+                                <div class="quick-action-text">
+
+                                    <h4>
+                                        Add Income
+                                    </h4>
+
+                                    <p>
+                                        Record money received
+                                    </p>
+
+                                </div>
+
+                            </a>
+
+                            <a
+                                href="transactions.html?type=expense"
+                                class="quick-action expense-action"
+                            >
+
+                                <div class="quick-action-icon">
+                                    💸
+                                </div>
+
+                                <div class="quick-action-text">
+
+                                    <h4>
+                                        Add Expense
+                                    </h4>
+
+                                    <p>
+                                        Record money spent
+                                    </p>
+
+                                </div>
+
+                            </a>
+
+                            <a
+                                href="analytics.html"
+                                class="quick-action analytics-action"
+                            >
+
+                                <div class="quick-action-icon">
+                                    📊
+                                </div>
+
+                                <div class="quick-action-text">
+
+                                    <h4>
+                                        View Analytics
+                                    </h4>
+
+                                    <p>
+                                        Understand your spending
+                                    </p>
+
+                                </div>
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+                <section class="recent-card">
+
+                    <div class="card-header">
+
+                        <div>
+
+                            <h3>
+                                Recent Transactions
+                            </h3>
+
+                            <p>
+                                Your latest financial activity
+                            </p>
+
+                        </div>
+
+                        <a
+                            href="transactions.html"
+                            class="view-link"
+                        >
+                            View All →
+                        </a>
+
+                    </div>
+
+                    <div
+                        id="recentTransactions"
+                        class="recent-transactions"
+
+                    </div>
+
+                </section>
+
+
+                <footer class="dashboard-footer">
+
+                    <p>
+                        © <span id="dashboardYear"></span>
+                        MoneyMap. All rights reserved.
+                    </p>
+
+                    <p>
+                        Personal Finance Dashboard
+                    </p>
+
+                </footer>
+
+            </div>
+
+        </main>
+
+    </div>
+
+
+    <script src="js/dashboard.js"></script>
+
+</body>
+
+</html>
